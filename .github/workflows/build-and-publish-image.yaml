@@ -60,7 +60,7 @@ jobs:
           build-args: BW_CLI_VERSION=${{ env.VERSION }}
           context: .
           push: true
-          tags: ghcr.io/charlesthomas/bitwarden-cli:${{ env.VERSION }}
+          tags: ghcr.io/${{ github.repository }}:${{ env.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
       - name: Create tag
         uses: actions/github-script@v6
