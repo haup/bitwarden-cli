@@ -6,9 +6,12 @@ bw config server "${BW_HOST}"
 
 declare BW_SESSION
 if [ "${BW_UESR}" ] && [ "${BW_PASSWORD}" ]; then
+    echo 'Authernticating with username & password'
     BW_SESSION=$(bw login "${BW_USER}" --passwordenv BW_PASSWORD --raw)
-elif [ "${BW_CLIENTID}" ] && [ "${BW_CLIENTSECRET}" ]; then
-    BW_SESSION=$(bw login --apikey --raw)
+elif [ "${BW_CLIENTID}" ] && [ "${BW_CLIENTSECRET}" ] && [ "${BW_PASSWORD}" ]; then
+    echo 'Authernticating with api-key & password'
+    bw login --apikey
+    BW_SESSION=$(bw unlock --passwordenv BW_PASSWORD --raw)
 fi
 export BW_SESSION
 
