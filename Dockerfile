@@ -6,10 +6,12 @@ ARG TARGETPLATFORM
 # Install based on architecture
 RUN ARCH=$(echo $TARGETPLATFORM | cut -d '/' -f2) && \
     if [ "$ARCH" = "amd64" ]; then \
-        apk add --no-cache wget unzip && \
+        apk add --no-cache wget unzip openssl && \
         wget https://github.com/bitwarden/clients/releases/download/cli-v${BW_CLI_VERSION}/bw-oss-linux-sha256-${BW_CLI_VERSION}.txt --no-verbose -O bw.zip.sha256 && \
         wget https://github.com/bitwarden/clients/releases/download/cli-v${BW_CLI_VERSION}/bw-oss-linux-${BW_CLI_VERSION}.zip --no-verbose -O bw.zip && \
-        echo "$(cat bw.zip.sha256) bw.zip" | sha256sum --check - && \
+        actual_sha256=$(sha256sum bw.zip | cut -d ' ' -f1) && \
+        expected_sha256=$(cat bw.zip.sha256 | cut -d ' ' -f1) && \
+        [ "$actual_sha256" = "$expected_sha256" ] || (echo "SHA256 mismatch!" && exit 1) && \
         unzip bw.zip && \
         chmod +x bw && \
         mv bw /usr/local/bin/bw && \
