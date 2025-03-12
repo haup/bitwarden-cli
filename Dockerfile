@@ -3,7 +3,7 @@ FROM alpine:latest
 ARG BW_CLI_VERSION
 ARG TARGETPLATFORM
 
-RUN apk add --no-cache bash
+RUN apk add --no-cache bash curl
 
 # Install based on architecture
 RUN ARCH=$(echo $TARGETPLATFORM | cut -d '/' -f2) && \
