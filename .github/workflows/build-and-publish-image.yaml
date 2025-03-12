@@ -76,8 +76,14 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           provenance: false
-          tags: ${{ env.CR_REPO }}:${{ env.VERSION }}
+          tags: |
+            ${{ env.CR_REPO }}:${{ env.VERSION }}
+            ${{ env.CR_REPO }}:latest
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Verify Multi-Arch Build
+        run: |
+          docker buildx imagetools inspect ${{ env.CR_REPO }}:${{ env.VERSION }}
 
       - name: Create tag
         uses: actions/github-script@v6
