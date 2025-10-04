@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.19
 
 ARG BW_CLI_VERSION
 ARG TARGETPLATFORM
@@ -18,7 +18,7 @@ RUN ARCH=$(echo $TARGETPLATFORM | cut -d '/' -f2) && \
         rm -rfv bw.zip*; \
     else \
         apk add --no-cache nodejs npm && \
-        npm install -g @bitwarden/cli && \
+        npm install -g @bitwarden/cli@latest && \
         ln -s /usr/local/bin/bw /usr/bin/bw; \
     fi
 
