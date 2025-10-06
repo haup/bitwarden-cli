@@ -16,8 +16,8 @@ docker pull ghcr.io/kab1r/bitwarden-cli:<official bitwarden cli version>
 ```
 
 check [VERSION](/VERSION) to see what the actual value is.
-when this doc was created it was `2025.1.4` so the full image was:
+when this doc was created it was `2025.4.0` so the full image was:
 
 ```bash
-ghcr.io/kab1r/bitwarden-cli:2025.1.4
+ghcr.io/kab1r/bitwarden-cli:2025.4.0
 ```

@@ -20,7 +20,7 @@ RUN ARCH=$(echo $TARGETPLATFORM | cut -d '/' -f2) && \
         rm -rfv bw.zip*; \
     else \
         apk add --no-cache nodejs npm && \
-        npm install -g @bitwarden/cli@latest && \
+        npm install -g @bitwarden/cli@${BW_CLI_VERSION} && \
         ln -s /usr/local/bin/bw /usr/bin/bw; \
     fi
 
